@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: penpot-exporter
+  name: penpot-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: penpot-exporter
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/penpot: "true"
+        io.kompose.service: penpot-exporter
+    spec:
+      containers:
+        - env:
+            - name: PENPOT_PUBLIC_URI
+              value: http://penpot-frontend
+          image: penpotapp/exporter:latest
+          name: penpot-exporter
+          resources: {}
+      restartPolicy: Always
+status: {}

@@ -1,0 +1,113 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: penpot-frontend
+  name: penpot-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: penpot-frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/penpot: "true"
+        io.kompose.service: penpot-frontend
+    spec:
+      containers:
+        - env:
+            - name: PENPOT_ALLOW_DEMO_USERS
+              valueFrom:
+                configMapKeyRef:
+                  key: PENPOT_ALLOW_DEMO_USERS
+                  name: docker-compose-penpot-env
+            - name: PENPOT_DATABASE_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: PENPOT_DATABASE_PASSWORD
+                  name: docker-compose-penpot-env
+            - name: PENPOT_DATABASE_URI
+              valueFrom:
+                configMapKeyRef:
+                  key: PENPOT_DATABASE_URI
+                  name: docker-compose-penpot-env
+            - name: PENPOT_DATABASE_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  key: PENPOT_DATABASE_USERNAME
+                  name: docker-compose-penpot-env
+            - name: PENPOT_PUBLIC_URI
+              valueFrom:
+                configMapKeyRef:
+                  key: PENPOT_PUBLIC_URI
+                  name: docker-compose-penpot-env
+            - name: PENPOT_REDIS_URI
+              valueFrom:
+                configMapKeyRef:
+                  key: PENPOT_REDIS_URI
+                  name: docker-compose-penpot-env
+            - name: PENPOT_REGISTRATION_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: PENPOT_REGISTRATION_ENABLED
+                  name: docker-compose-penpot-env
+            - name: PENPOT_SMTP_DEFAULT_FROM
+              valueFrom:
+                configMapKeyRef:
+                  key: PENPOT_SMTP_DEFAULT_FROM
+                  name: docker-compose-penpot-env
+            - name: PENPOT_SMTP_DEFAULT_REPLY_TO
+              valueFrom:
+                configMapKeyRef:
+                  key: PENPOT_SMTP_DEFAULT_REPLY_TO
+                  name: docker-compose-penpot-env
+            - name: PENPOT_SMTP_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: PENPOT_SMTP_ENABLED
+                  name: docker-compose-penpot-env
+            - name: PENPOT_STORAGE_BACKEND
+              valueFrom:
+                configMapKeyRef:
+                  key: PENPOT_STORAGE_BACKEND
+                  name: docker-compose-penpot-env
+            - name: PENPOT_STORAGE_FS_DIRECTORY
+              valueFrom:
+                configMapKeyRef:
+                  key: PENPOT_STORAGE_FS_DIRECTORY
+                  name: docker-compose-penpot-env
+            - name: PENPOT_TELEMETRY_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: PENPOT_TELEMETRY_ENABLED
+                  name: docker-compose-penpot-env
+            - name: PENPOT_TELEMETRY_WITH_TAIGA
+              valueFrom:
+                configMapKeyRef:
+                  key: PENPOT_TELEMETRY_WITH_TAIGA
+                  name: docker-compose-penpot-env
+          image: penpotapp/frontend:latest
+          name: penpot-frontend
+          ports:
+            - containerPort: 80
+          resources: {}
+          volumeMounts:
+            - mountPath: /opt/data
+              name: penpot-assets-data
+      restartPolicy: Always
+      volumes:
+        - name: penpot-assets-data
+          persistentVolumeClaim:
+            claimName: penpot-assets-data
+status: {}

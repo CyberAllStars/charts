@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: penpot-backend
+  name: penpot-backend
+spec:
+  ports:
+    - name: "6060"
+      port: 6060
+      targetPort: 6060
+  selector:
+    io.kompose.service: penpot-backend
+status:
+  loadBalancer: {}

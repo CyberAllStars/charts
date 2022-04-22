@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: penpot-backend
+  name: penpot-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: penpot-backend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/penpot: "true"
+        io.kompose.service: penpot-backend
+    spec:
+      containers:
+        - envFrom:
+            - configMapRef:
+                name: docker-compose-penpot-env
+          image: penpotapp/backend:latest
+          name: penpot-backend
+          resources: {}
+          volumeMounts:
+            - mountPath: /opt/data
+              name: penpot-assets-data
+      restartPolicy: Always
+      volumes:
+        - name: penpot-assets-data
+          persistentVolumeClaim:
+            claimName: penpot-assets-data
+status: {}
