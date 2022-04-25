@@ -1,6 +1,6 @@
-find $1
+
         
-for i in $( find $1 -iname Chart.yaml ); do
+for i in $( find $1 -iname Chart.yaml | sed 's/Chart\\.yaml//g' ); do
 helm package $i;
 done
 
