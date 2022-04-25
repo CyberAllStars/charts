@@ -126,13 +126,10 @@ spec:
         sshagent(credentials: ['38ae9ff7-0a7e-4b82-9b92-66cd07f5c976']) {
           script {        
               container('builder') {
-                    sh("""; 
-                      git config --global user.email "jean@tryb.co.za"
-                      git config --global user.name "exenin"     
-                      
+                    sh("""git config --global user.email "ww-jenkins@tryb.co.za"
+                      git config --global user.name "ww-jenkins-chartbuilder"     
                       [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
-                      ssh-keyscan -t rsa,dsa github.com >> ~/.ssh/known_hosts   
-                    """)
+                      ssh-keyscan -t rsa,dsa github.com >> ~/.ssh/known_hosts""")
                      sh("""git diff; git add index.yaml *.tgz; git branch ${COMMIT}; git checkout ${COMMIT};
                       git commit -m'index update for ${COMMIT}';
                       git checkout ${env.BRANCH_NAME}; git merge $COMMIT;
