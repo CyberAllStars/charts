@@ -134,8 +134,9 @@ spec:
                      sh("""git diff; git add index.yaml *.tgz; git branch ${COMMIT}; git checkout ${COMMIT};
                       git commit -m'index update for ${COMMIT}';
                       git checkout ${env.BRANCH_NAME}; git merge $COMMIT;
+                      git remote add upstream ssh://git@github.com:CyberAllStars/charts
                       git remote -v;
-                      git push origin ${env.BRANCH_NAME}""")
+                      git push upstream ${env.BRANCH_NAME}""")
  
    
               }
