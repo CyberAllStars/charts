@@ -1,7 +1,11 @@
 
+
+o=$(pwd)
         
 for i in $( find $1 -iname Chart.yaml ); do
-helm package $(echo $i  | sed 's/Chart\.yaml//g');
+        n=$(echo $i  | sed 's/Chart\.yaml//g');
+        cd $n; helm dependency update
+        helm package $n
 done
 
 helm repo index .
