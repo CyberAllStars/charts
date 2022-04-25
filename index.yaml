@@ -3,12 +3,12 @@ entries:
   chartz:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-04-25T17:04:41.180282548Z"
+    created: "2022-04-25T17:05:30.484074209Z"
     description: A Helm chart for Kubernetes
-    digest: 5924d4e6a21d997f829f7f566e8d133c3c27e9134ab03f46db8b5bb692aaa8eb
+    digest: 22fd0663f60b584fbe017a14f777e0331ef755f10659e34b2dbe6f647387a304
     name: chartz
     type: application
     urls:
     - chartz-0.1.0.tgz
     version: 0.1.0
-generated: "2022-04-25T17:04:41.179012854Z"
+generated: "2022-04-25T17:05:30.482766086Z"
