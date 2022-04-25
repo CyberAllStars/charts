@@ -131,7 +131,10 @@ spec:
                       git config --global user.email "builder@tryb.co.za"
                       git config --global user.name "builderwwjenkins6yhngh33juytghjj"                   
                     """)
-                     sh("git diff; git add index.yaml *.tgz; git commit -m'index update for ${COMMIT}'; git push origin ${env.BRANCH_NAME}")
+                     sh("git diff; git add index.yaml *.tgz; git branch ${COMMIT}; git checkout ${COMMIT};
+                      git commit -m'index update for ${COMMIT}';
+                      git checkout ${env.BRANCH_NAME}; git merge $COMMIT;
+                     git push origin ${env.BRANCH_NAME}")
                  // }
    
               }
