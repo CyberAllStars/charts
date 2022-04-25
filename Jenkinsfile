@@ -129,7 +129,8 @@ spec:
                   //withCredentials([sshUserPrivateKey(credentialsId: '38ae9ff7-0a7e-4b82-9b92-66cd07f5c976', gitToolName: 'git')]) {
                     sh("""   
                       git config --global user.email "builder@tryb.co.za"
-                      git config --global user.name "exenin"                   
+                      git config --global user.name "exenin"     
+                      ssh-keyscan -t rsa github.com               
                     """)
                      sh("""git diff; git add index.yaml *.tgz; git branch ${COMMIT}; git checkout ${COMMIT};
                       git commit -m'index update for ${COMMIT}';
