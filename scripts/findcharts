@@ -1,5 +1,5 @@
         find $1
         
-        find $1/ex -iname Chart.yaml | xargs helm package 
+        find $1 -iname Chart.yaml | xargs helm package 
         helm repo index .
      
