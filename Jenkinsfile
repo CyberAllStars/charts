@@ -130,13 +130,14 @@ spec:
                       git config --global user.name "exenin"     
                       [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
                       ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts""")
+
                      sh("""git diff; git add index.yaml *.tgz; git branch ${COMMIT}; git checkout ${COMMIT};
                       git commit -m'index update for ${COMMIT}';
                       git checkout ${env.BRANCH_NAME}; git merge $COMMIT;""")
               }
           }  
           sshagent(credentials: ['dfd58b50-9a3d-4a8a-b98c-a7d4d641037f']) {
-                 sh("git push upstream ${env.BRANCH_NAME}")
+                 sh("git push origin ${env.BRANCH_NAME}")
           }
         }
       }
