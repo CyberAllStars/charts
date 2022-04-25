@@ -116,7 +116,7 @@ spec:
           script {        
             
               container('helm') {
-                sh("sh scripts/findcharts ${env.WORKSPACE}")
+                sh("sh -x scripts/findcharts ${env.WORKSPACE}")
               }
           }
       }
