@@ -1,7 +1,7 @@
 
         
 for i in $( find $1 -iname Chart.yaml ); do
-helm package $(echo $i  | sed 's/Chart\\.yaml//g');
+helm package $(echo $i  | sed 's/Chart\.yaml//g');
 done
 
 helm repo index .
