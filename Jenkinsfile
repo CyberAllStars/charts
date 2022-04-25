@@ -129,7 +129,7 @@ spec:
                   //withCredentials([sshUserPrivateKey(credentialsId: '38ae9ff7-0a7e-4b82-9b92-66cd07f5c976', gitToolName: 'git')]) {
                     sh("""                      
                     """)
-                     sh("git diff; git add index.yaml *.tgz; git commit -m'index update for ${COMMIT}'; git push origin ${BRANCH}")
+                     sh("git diff; git add index.yaml *.tgz; git commit -m'index update for ${COMMIT}'; git push origin ${env.BRANCH_NAME}")
                  // }
    
               }
