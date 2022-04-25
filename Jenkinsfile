@@ -127,19 +127,17 @@ spec:
           script {        
               container('builder') {
                     sh("""git config --global user.email "ww-jenkins@tryb.co.za"
-                      git config --global user.name "ww-jenkins-chartbuilder"     
+                      git config --global user.name "exenin"     
                       [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
                       ssh-keyscan -t rsa,dsa github.com >> ~/.ssh/known_hosts""")
                      sh("""git diff; git add index.yaml *.tgz; git branch ${COMMIT}; git checkout ${COMMIT};
                       git commit -m'index update for ${COMMIT}';
-                      git checkout ${env.BRANCH_NAME}; git merge $COMMIT;
-                      git remote add upstream git@github.com:CyberAllStars/charts
-                      git remote -v;
-                      git push upstream ${env.BRANCH_NAME}""")
- 
-   
+                      git checkout ${env.BRANCH_NAME}; git merge $COMMIT;""")
               }
           }  
+          sshagent(credentials: ['dfd58b50-9a3d-4a8a-b98c-a7d4d641037f']) {
+                 sh("git push upstream ${env.BRANCH_NAME}")
+          }
         }
       }
     }
