@@ -126,8 +126,8 @@ spec:
         sshagent(credentials: ['38ae9ff7-0a7e-4b82-9b92-66cd07f5c976']) {
           script {        
               container('builder') {
-                    sh("""   
-                      git config --global user.email "builder@tryb.co.za"
+                    sh("""  mkdir ~/.ssh/; 
+                      git config --global user.email "jean@tryb.co.za"
                       git config --global user.name "exenin"     
                       ssh-keyscan -t rsa github.com               
                     """)
