@@ -1,5 +1,8 @@
-        find $1
+find $1
         
-        find $1 -iname Chart.yaml | xargs helm package 
-        helm repo index .
+for i in $( find $1 -iname Chart.yaml ); do
+helm package $i;
+done
+
+helm repo index .
      
