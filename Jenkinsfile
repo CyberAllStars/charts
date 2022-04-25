@@ -129,7 +129,7 @@ spec:
                     sh("""git config --global user.email "ww-jenkins@tryb.co.za"
                       git config --global user.name "exenin"     
                       [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
-                      ssh-keyscan -t rsa,dsa github.com >> ~/.ssh/known_hosts""")
+                      ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts""")
                      sh("""git diff; git add index.yaml *.tgz; git branch ${COMMIT}; git checkout ${COMMIT};
                       git commit -m'index update for ${COMMIT}';
                       git checkout ${env.BRANCH_NAME}; git merge $COMMIT;""")
