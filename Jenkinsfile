@@ -126,7 +126,6 @@ spec:
         sshagent(credentials: ['38ae9ff7-0a7e-4b82-9b92-66cd07f5c976']) {
           script {        
               container('builder') {
-                  //withCredentials([sshUserPrivateKey(credentialsId: '38ae9ff7-0a7e-4b82-9b92-66cd07f5c976', gitToolName: 'git')]) {
                     sh("""   
                       git config --global user.email "builder@tryb.co.za"
                       git config --global user.name "exenin"     
@@ -135,8 +134,9 @@ spec:
                      sh("""git diff; git add index.yaml *.tgz; git branch ${COMMIT}; git checkout ${COMMIT};
                       git commit -m'index update for ${COMMIT}';
                       git checkout ${env.BRANCH_NAME}; git merge $COMMIT;
-                     git push origin ${env.BRANCH_NAME}""")
-                 // }
+                      git remote -v;
+                      git push origin ${env.BRANCH_NAME}""")
+ 
    
               }
           }  
