@@ -1,0 +1,12 @@
+taiga:
+  global:
+    # enabled is the master enabled switch. Setting this to true or false
+    # will enable or disable all the components within this chart by default.
+    enabled: true
+    # Used to define custom django.fullname in template.
+    projectName: "taiga"
+    # image sets the repo,tag and pullPolicy of the project
+    #image:
+     # registry: "mycompany/microservice1"
+     # tag: v1.11.12
+     # pullPolicy: Always

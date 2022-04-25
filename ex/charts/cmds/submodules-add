@@ -1,0 +1,8 @@
+git submodule add git@github.com:CyberAllStars/django-DefectDojo.git src/defectdojo &
+
+git submodule add git@github.com:CyberAllStars/PatrowlEngines.git src/patrowlengines &
+git submodule add git@github.com:CyberAllStars/PatrowlHears.git src/patrowlhears &
+git submodule add git@github.com:CyberAllStars/PatrowlManager.git src/patrowlmanager &
+
+git submodule add git@github.com:CyberAllStars/gophish.git src/gophish &
+git submodule add git@github.com:CyberAllStars/metasploit-framework.git src/metasploit-framework &

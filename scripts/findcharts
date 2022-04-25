@@ -1,0 +1,5 @@
+        find $1
+        
+        find $1/ext -iname Chart.yaml | sed 's/Chart\\.yaml//g' | xargs helm package 
+        helm repo index .
+     

@@ -1,0 +1,205 @@
+
+def notifyBuild(String buildStatus = 'STARTED', String message = '') {
+  // build status of null means successful
+  buildStatus =  buildStatus ?: 'SUCCESSFUL'
+
+  // Default values
+  def colorName = 'RED'
+  def colorCode = '#FF0000'
+  def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+  def summary = "${subject} (${env.BUILD_URL}) ${message}"
+
+  // Override default values based on build status
+  if (buildStatus == 'STARTED' || buildStatus == 'MESSAGE') {
+    color = 'YELLOW'
+    colorCode = '#FFFF00'
+  } else if (buildStatus == 'SUCCESSFUL') {
+    color = 'GREEN'
+    colorCode = '#00FF00'
+  } else {
+    color = 'RED'
+    colorCode = '#FF0000'
+  }
+
+  // Send notifications
+  slackSend (color: colorCode, message: summary)
+}     
+pipeline {
+  environment {
+    COMMIT = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+    PROJECT = "bzrlvl"
+    APP_NAME = "bazaarcrm"
+    FE_SVC_NAME = "${APP_NAME}"
+    CLUSTER = "jenkins-cd"
+    CLUSTER_ZONE = "us-east1-b"
+    IMAGE_TAG = "registry.tryb.co.za/${APP_NAME}:${COMMIT}"
+    JENKINS_CRED = "${PROJECT}"
+    ENVSPACE = "${env.APP_NAME}-${env.BRANCH_NAME}"
+   
+  }
+  agent {
+    kubernetes {
+      //label "st2dio"
+      defaultContainer 'jnlp'
+      yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+labels:
+
+  jenkins: slave
+spec:
+  # Use service account that can deploy to all namespaces
+  #serviceAccountName: jenkins
+  #imagePullSecrets:
+  #      - name: gcr-json-key 
+  containers:
+
+
+    
+  - name: kubectl
+    image: gcr.io/cloud-builders/kubectl
+    command:
+    - cat
+    tty: true
+    volumeMounts:
+    - name: kubeconf
+      mountPath: /root/.kube/config
+      subPath: kubeconf
+      readOnly: true
+       
+  - name: git
+    image: gcr.io/cloud-builders/git
+    command:
+    - cat
+    tty: true
+
+  - name: builder
+    image:  registry.tryb.co.za/builder:latest
+    imagePullPolicy: Always    
+    command:
+    - cat
+    tty: true
+    volumeMounts:
+    - name: deploy-gpgkey
+      mountPath: /secret/deploy.keys.pvt
+      subPath: deploy.keys.pvt
+      readOnly: true
+
+
+
+  - name: docker
+    image: docker:latest
+    command:
+    - cat
+    tty: true
+    volumeMounts:
+    - mountPath: /var/run/docker.sock
+      name: docker-sock
+  
+  volumes:
+    - name: docker-sock
+      hostPath:
+        path: /var/run/docker.sock
+    - name: deploy-gpgkey
+      secret:
+        secretName: deploy-gpgkey
+    - name: kubeconf
+      secret:
+        secretName: kubeconf
+
+
+"""
+    }
+  }
+
+  stages {
+    stage('notify'){
+      steps {
+        notifyBuild('STARTED')
+      }
+    }
+    stage('CHECKOUT SCM') {
+      steps {
+        notifyBuild('checkout scm')
+      }
+    }
+    stage('build Image') {
+      steps {
+          script {        
+              container('docker') {
+                docker.withRegistry('http://registry.tryb.co.za') {
+                app = docker.build("${IMAGE_TAG}" ,'./src')
+              }
+          }
+        }
+      }
+    }
+    stage('Push Image') {
+      steps {
+          script {        
+              container('docker') {
+                docker.withRegistry('http://registry.tryb.co.za') {
+                sh("docker push ${IMAGE_TAG}")
+              }
+          }
+        }
+      }
+    }
+  
+    stage('Generate K8s Templates') {
+      steps {
+        script {
+            notifyBuild('Generating Templates')
+              container('builder') {   
+                sh('gpg --import /secret/deploy.keys.pvt')
+                sh('bash /builder/scripts/get_repo_keys_full.sh')   
+
+                sh("export BUILDTAG=${COMMIT}; export BRANCH_NAME=${env.BRANCH_NAME}; make template")
+                
+              }
+              notifyBuild("Templates Done")
+        }
+      }  
+   }
+
+
+    stage('Deploy K8s ') {
+      steps {
+        script {
+          
+          
+        
+          if( "${env.BRANCH_NAME}" == "development" ) {
+            notifyBuild("Deploy ${env.BRANCH_NAME} start")
+            container('kubectl'){   
+              sh("kubectl  apply -f tmp-k8s/ ")
+            }
+            
+          }
+          if( "${env.BRANCH_NAME}" == "master" ) {
+            notifyBuild("Deploy ${env.BRANCH_NAME} start")
+            container('kubectl'){              
+              container('gcloud'){              
+                  sh('gcloud auth activate-service-account --key-file=/secret/deployer.json &&\
+                              gcloud container clusters get-credentials bazaarlevel --zone us-central1-c --project bzrlvl')
+
+                  sh("kubectl --context=gke_bzrlvl_us-central1-c_bazaarlevel apply -f tmp-k8s/ ")
+                  // sh("kubectl --context=gke_bzrlvl_us-central1-c_cluster-1 apply -f www/tmp-k8s/ ")
+                  // sh("kubectl --context=gke_bzrlvl_us-central1-c_cluster-1 apply -f portal/tmp-k8s/ ")
+                }
+              }
+            }
+          notifyBuild("Deploy ${env.BRANCH_NAME} done")
+        }
+      }
+    }
+    stage('Finally') {
+      steps {
+        notifyBuild('SUCCESSFUL')
+      }
+    }
+  } 
+}
+
+      
