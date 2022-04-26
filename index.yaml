@@ -3,9 +3,9 @@ entries:
   chartz:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-04-26T01:25:50.6747128Z"
+    created: "2022-04-26T01:35:37.331530243Z"
     description: A Helm chart for Kubernetes
-    digest: 787271af32db72624b6fc66aae81e977e35dcd9b0bb965ff5ddbcd74d98efd7e
+    digest: 94dcf3c279d1dfa1e7ef8980a19cdb814f62e032c45422171550ad09fd1a036b
     name: chartz
     type: application
     urls:
@@ -14,7 +14,7 @@ entries:
   defectdojo:
   - apiVersion: v1
     appVersion: 2.9.0
-    created: "2022-04-26T01:25:50.686956866Z"
+    created: "2022-04-26T01:35:37.343578709Z"
     dependencies:
     - condition: mysql.enabled
       name: mysql
@@ -33,7 +33,7 @@ entries:
       repository: '@bitnami'
       version: 15.5.4
     description: A Helm chart for Kubernetes to install DefectDojo
-    digest: be57ceaa89326134d3539d549cd9956a5d2157157ab48faf8bc74f9c7a473bf2
+    digest: 64ab6889747a847e0eb5eb4868ec78816a120d3365c29620d27fa1c0a3d9cf12
     icon: https://www.defectdojo.org/img/favicon.ico
     maintainers:
     - email: defectdojo-project@owasp.org
@@ -43,4 +43,4 @@ entries:
     urls:
     - defectdojo-1.6.30.tgz
     version: 1.6.30
-generated: "2022-04-26T01:25:50.459912457Z"
+generated: "2022-04-26T01:35:37.158469596Z"
