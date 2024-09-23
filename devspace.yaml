@@ -4,12 +4,24 @@ name: bzrlvl-mmllc
 # This is a list of `pipelines` that DevSpace can execute (you can define your own)
 pipelines:
   # This is the pipeline for the main command: `devspace dev` (or `devspace run-pipeline dev`)
-  dev:
+
+  ci:
+    
     run: |-
       run_dependencies --all       # 1. Deploy any projects this project needs (see "dependencies")
       ensure_pull_secrets --all    # 2. Ensure pull secrets
       create_deployments --all     # 3. Deploy Helm charts and manifests specfied as "deployments"
       start_dev app                # 4. Start dev mode "app" (see "dev" section)
+
+  dev:
+    run: |-
+      # Deploy the application and then start dev
+      run_default_pipeline dev
+
+      # Open VSCode as soon as we are done
+      code --folder-uri vscode-remote://ssh-remote+my-app.devspace/app
+    
+
   # You can run this pipeline via `devspace deploy` (or `devspace run-pipeline deploy`)
   deploy:
     run: |-
@@ -20,6 +32,7 @@ pipelines:
   build:
     run: |
        build_images --all
+
 
 # If you want to always use the local registry.
 localRegistry:
@@ -39,6 +52,13 @@ images:
 
 # This is a list of `deployments` that DevSpace can create for this project
 deployments:
+  backend:
+    helm:
+      # If chart: is omitted, component chart will be used
+      values:
+        containers:
+          - image: golang:1.18
+
   redis:
     helm:
       chart:
@@ -58,15 +78,21 @@ deployments:
       chart:
         name: ./helm
       valuesFiles:
-      - helm/values/examples/values.example.anythink-v2-alpha.yaml
+      - charts/
 
+  my-app:
+    helm:
+      # If chart: is omitted, component chart will be used
+      values:
+        containers:
+          - image: golang:1.18
 
 
 # This is a list of `dev` containers that are based on the containers created by your deployments
 dev:
-  app:
+  frontend-dev-0:
     # Search for the container that runs this image
-    imageSelector: anythink/v2-alpha:dev
+    imageSelector: app:dev
     # Replace the container image with this dev-optimized image (allows to skip image building during development)
     devImage: ghcr.io/loft-sh/devspace-containers/typescript:18-alpine
     # Sync files between the local filesystem and the development container
@@ -112,14 +138,7 @@ dev:
       - gitCredentials: true
       - command: devspace
 
-# Define the flow when what is started
-pipelines:
-  dev: |-
-    # Deploy the application and then start dev
-    run_default_pipeline dev
 
-    # Open VSCode as soon as we are done
-    code --folder-uri vscode-remote://ssh-remote+my-app.devspace/app
 
 # Use the `commands` section to define repeatable dev workflows for this project 
 commands:
@@ -135,3 +154,12 @@ commands:
 #     tag: v1.0.0
 #   ui:
 #     path: ./ui        # Path-based dependencies (for monorepos)
+
+# Define the flow when what is started
+# pipelines:
+  # dev: |-
+  #   # Deploy the application and then start dev
+  #   run_default_pipeline dev
+
+  #   # Open VSCode as soon as we are done
+  #   code --folder-uri vscode-remote://ssh-remote+my-app.devspace/app

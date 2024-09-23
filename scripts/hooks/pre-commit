@@ -1,0 +1,34 @@
+#!/bin/sh
+
+
+# Load current version from Chart.yaml
+VESION_FILE="./VERSION"
+
+if [ ! -f $VESION_FILE ]; then
+    echo "Trying to checkout VESION_FILE file from git"
+    git checkout -- $VESION_FILE
+    if [ ! -f $VESION_FILE ]; then
+        echo "VESION_FILE File does not exist, creating it"
+        echo "0.0.0" > $VESION_FILE
+    fi
+    cat $VESION_FILE
+fi
+
+CURRENT_VERSION=$(cat $VESION_FILE)
+
+
+MAJOR_VERSION=$(echo $CURRENT_VERSION | cut -d '.' -f 1)
+MINOR_VERSION=$(echo $CURRENT_VERSION | cut -d '.' -f 2)
+PATCH_VERSION=$(echo $CURRENT_VERSION | cut -d '.' -f 3)
+
+# Increment PATCH version for every commit
+PATCH_VERSION=$((PATCH_VERSION + 1))
+
+# New version
+NEW_VERSION="$MAJOR_VERSION.$MINOR_VERSION.$PATCH_VERSION"
+
+echo $NEW_VERSION > $VESION_FILE
+
+# Commit and push changes
+git add $VESION_FILE
+git tag $NEW_VERSION
