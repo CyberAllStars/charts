@@ -39,11 +39,11 @@ install_digitalocean_cli() {
       sudo snap connect doctl:dot-docker
   else
     if [ "$OS" = "mac" ]; then
-     
+     echo 1
     fi
 
     if [ "$OS" = "Linux" ]; then
-      
+      echo 1
     fi
   fi
 
