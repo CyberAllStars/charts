@@ -1,0 +1,137 @@
+version: v2beta1
+name: bzrlvl-mmllc
+
+# This is a list of `pipelines` that DevSpace can execute (you can define your own)
+pipelines:
+  # This is the pipeline for the main command: `devspace dev` (or `devspace run-pipeline dev`)
+  dev:
+    run: |-
+      run_dependencies --all       # 1. Deploy any projects this project needs (see "dependencies")
+      ensure_pull_secrets --all    # 2. Ensure pull secrets
+      create_deployments --all     # 3. Deploy Helm charts and manifests specfied as "deployments"
+      start_dev app                # 4. Start dev mode "app" (see "dev" section)
+  # You can run this pipeline via `devspace deploy` (or `devspace run-pipeline deploy`)
+  deploy:
+    run: |-
+      run_dependencies --all                            # 1. Deploy any projects this project needs (see "dependencies")
+      ensure_pull_secrets --all                         # 2. Ensure pull secrets
+      build_images --all -t $(git describe --always)    # 3. Build, tag (git commit hash) and push all images (see "images")
+      create_deployments --all                          # 4. Deploy Helm charts and manifests specfied as "deployments"
+  build:
+    run: |
+       build_images --all
+
+# If you want to always use the local registry.
+localRegistry:
+  enabled: true
+  name: registry
+  namespace: mmllc
+  localbuild: true
+  image: registry:2.8.1
+  port: 5000
+
+images:
+  supabase:
+    image: registry:5000/supabase:dev
+    dockerfile: services/supabase/charts/supabase
+    context: services/supabase/charts/supabase
+
+
+# This is a list of `deployments` that DevSpace can create for this project
+deployments:
+  redis:
+    helm:
+      chart:
+        name: redis
+        repo: https://charts.bitnami.com/bitnami
+        version: 20.1.4
+
+  postgres:
+    helm:
+      chart:
+        name: postgres
+        repo: https://charts.bitnami.com/bitnami
+        version: 15.5.32
+  
+  supabase:
+    helm:
+      chart:
+        name: ./helm
+      valuesFiles:
+      - helm/values/examples/values.example.anythink-v2-alpha.yaml
+
+
+
+# This is a list of `dev` containers that are based on the containers created by your deployments
+dev:
+  app:
+    # Search for the container that runs this image
+    imageSelector: anythink/v2-alpha:dev
+    # Replace the container image with this dev-optimized image (allows to skip image building during development)
+    devImage: ghcr.io/loft-sh/devspace-containers/typescript:18-alpine
+    # Sync files between the local filesystem and the development container
+    sync:
+      - path: ./
+    # Open a terminal and use the following command to start it
+    terminal:
+      command: ./devspace_start.sh
+    # Inject a lightweight SSH server into the container (so your IDE can connect to the remote dev env)
+    ssh:
+      enabled: true
+    # Make the following commands from my local machine available inside the dev container
+    proxyCommands:
+      - command: devspace
+      - command: kubectl
+      - command: helm
+      - gitCredentials: true
+    # Forward the following ports to be able access your application via localhost
+    ports:
+      - port: "9229"
+
+  my-app:
+    # Select the pod we just have deployed
+    imageSelector: golang:1.18
+    # Make sure the pod is sleeping
+    command: ["sh", "-c", "tail -f /dev/null"]
+    # Change working dir to /app
+    workingDir: /app
+    # Create ssh connection to container and save my-app.devspace ssh configuration to ~/.ssh/config
+    ssh:
+      localHostname: my-app.devspace
+    # Forward the port to the local machine
+    ports:
+      - port: 9000:9000
+    # Sync local files into container at /app
+    sync:
+      - path: ./:/app
+      - path: "${DEVSPACE_USER_HOME}/.gitconfig:/root/.gitconfig"
+        file: true
+        disableDownload: true
+    # Optional: make sure git credentials and devspace are available inside the container
+    proxyCommands:
+      - gitCredentials: true
+      - command: devspace
+
+# Define the flow when what is started
+pipelines:
+  dev: |-
+    # Deploy the application and then start dev
+    run_default_pipeline dev
+
+    # Open VSCode as soon as we are done
+    code --folder-uri vscode-remote://ssh-remote+my-app.devspace/app
+
+# Use the `commands` section to define repeatable dev workflows for this project 
+commands:
+  migrate-db:
+    command: |-
+      echo 'This is a cross-platform, shared command that can be used to codify any kind of dev task.'
+      echo 'Anyone using this project can invoke it via "devspace run migrate-db"'
+
+# Define dependencies to other projects with a devspace.yaml
+# dependencies:
+#   api:
+#     git: https://...  # Git-based dependencies
+#     tag: v1.0.0
+#   ui:
+#     path: ./ui        # Path-based dependencies (for monorepos)
