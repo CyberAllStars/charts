@@ -48,7 +48,6 @@ vendor/
 # Ignore all editor artifacts
 *.sublime-project
 *.sublime-workspace
-*.vscode/
 .settings.xml
 .project
 
