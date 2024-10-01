@@ -1,14 +1,20 @@
+## Usage
 
+[Helm](https://helm.sh) must be installed to use the charts.  Please refer to
+Helm's [documentation](https://helm.sh/docs) to get started.
 
-This is a project to act as a base template for any mono repo microsvc development work
-fork + devspace init
+Once Helm has been set up correctly, add the repo as follows:
 
-We want to be forward thinking. 
-K8S 
+    helm repo add YOUR_REPO_NAME YOUR_REPO_URL
 
-Our goal is to create the perfect developer environment to improve effeciency and debugging speed.
+If you had already added this repo earlier, run `helm repo update` to retrieve
+the latest versions of the packages.  You can then run `helm search repo
+{alias}` to see the charts.
 
+To install the YOUR_REPO_NAME chart:
 
+    helm install demo YOUR_REPO_NAME/YOUR_CHART_NAME
 
-https://www.daytona.io/dotfiles/ultimate-guide-to-dev-containers#what-are-dev-containers
-https://code.visualstudio.com/docs/devcontainers/containers
+To uninstall the chart:
+
+    helm delete demo
