@@ -12,10 +12,16 @@ debug_default_vaules = False
 debug_reg_add = False
 run_all = False if debug_default_vaules or debug_reg_add or debug_update else True
 
+repo_bucket = []
+
 for dep in chart['dependencies']:
     name = dep['name']
     repo = dep['repository']
     condition = dep.get('condition', True)
+    if name in repo_bucket:
+        print(f"Skipping {name} as it already exists")
+        break
+    repo_bucket.append(name)
     
     if run_all or debug_reg_add:
         # ADD REG LOCAL
