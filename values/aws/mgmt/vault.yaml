@@ -251,27 +251,27 @@ vault:
     # Configure the logging format for the Vault server.
     # Supported log formats include: standard, json
     logFormat: ""
-    volumes: 
-      - name: vault-data-0
-        persistentVolumeClaim:
-          claimName: vault-data-0
+    # volumes: 
+    #   - name: vault-data-0
+    #     persistentVolumeClaim:
+    #       claimName: vault-data-0
 
-      - name: vault-audit-0
+    #   - name: vault-audit-0
   
-        persistentVolumeClaim:
-          claimName: vault-audit-0
+    #     persistentVolumeClaim:
+    #       claimName: vault-audit-0
 
-    # volumeMounts is a list of volumeMounts for the main server container. These are rendered
-    # via toYaml rather than pre-processed like the extraVolumes value.
-    # The purpose is to make it easy to share volumes between containers.
-    volumeMounts: 
-      - mountPath: /vault/data
-        name: vault-data-0
-        readOnly: false
+    # # volumeMounts is a list of volumeMounts for the main server container. These are rendered
+    # # via toYaml rather than pre-processed like the extraVolumes value.
+    # # The purpose is to make it easy to share volumes between containers.
+    # volumeMounts: 
+    #   - mountPath: /vault/data
+    #     name: vault-data-0
+    #     readOnly: false
 
-      - mountPath: /vault/audit
-        name: vault-audit-0
-        readOnly: false
+    #   - mountPath: /vault/audit
+    #     name: vault-audit-0
+    #     readOnly: false
 
     # This configures the Vault Statefulset to create a PVC for data
     # storage when using the file or raft backend storage engines.
