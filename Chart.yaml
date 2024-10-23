@@ -108,6 +108,37 @@ dependencies:
   name: open-webui
   repository: https://helm.openwebui.com/
   version: 3.3.1
+
+
+- condition: kong.enabled
+  name: kong
+  repository: https://charts.konghq.com
+  version: 2.14.1
+
+- condition: kratos.enabled
+  name: kratos
+  repository: https://k8s.ory.sh/helm/charts
+  version: 0.10.0
+- condition: keto.enabled
+  name: keto
+  repository: https://k8s.ory.sh/helm/charts
+  version: 0.10.0
+- condition: hydra.enabled
+  name: hydra
+  repository: https://k8s.ory.sh/helm/charts
+  version: 0.10.0
+- condition: oathkeeper.enabled
+  name: oathkeeper
+  repository: https://k8s.ory.sh/helm/charts
+  version: 0.10.0
+- condition: hydraMaester.enabled
+  name: hydraMaester
+  repository: https://k8s.ory.sh/helm/charts
+  version: 0.10.0
+- condition: oathkeeperMaester.enabled
+  name: oathkeeperMaester
+  repository: https://k8s.ory.sh/helm/charts
+  version: 0.10.0
 description: A Helm chart for Kubernetes
 name: chart
 type: application
