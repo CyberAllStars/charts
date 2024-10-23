@@ -59,6 +59,8 @@ func main() {
 		}
 	}
 
+	chart.Dependencies = removeDuplicates(chart.Dependencies)
+
 	data, err = yaml.Marshal(chart)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "error: %v\n", err)
@@ -115,6 +117,35 @@ func saveDefaultValues(dep struct {
 
 	fname := filepath.Join(folder, fmt.Sprintf("%s_default_values.yaml", dep.Name))
 	return ioutil.WriteFile(fname, []byte(out), 0644)
+}
+
+func removeDuplicates(dependencies []struct {
+	Name       string `yaml:"name"`
+	Repository string `yaml:"repository"`
+	Condition  string `yaml:"condition,omitempty"`
+	Version    string `yaml:"version,omitempty"`
+}) []struct {
+	Name       string `yaml:"name"`
+	Repository string `yaml:"repository"`
+	Condition  string `yaml:"condition,omitempty"`
+	Version    string `yaml:"version,omitempty"`
+} {
+	seen := make(map[string]bool)
+	var result []struct {
+		Name       string `yaml:"name"`
+		Repository string `yaml:"repository"`
+		Condition  string `yaml:"condition,omitempty"`
+		Version    string `yaml:"version,omitempty"`
+	}
+
+	for _, dep := range dependencies {
+		if !seen[dep.Name] {
+			seen[dep.Name] = true
+			result = append(result, dep)
+		}
+	}
+
+	return result
 }
 
 func runCmd(cmd string, args ...string) error {

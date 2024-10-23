@@ -1,145 +1,133 @@
-apiVersion: v2
-appVersion: "0.0.6"
 dependencies:
-- condition: grafana.enabled
-  name: grafana
-  repository: https://grafana.github.io/helm-charts
-  version: 8.5.2
-- condition: prometheus.enabled
-  name: prometheus
-  repository: https://prometheus-community.github.io/helm-charts
-  version: 25.27.0
-- condition: loki.enabled
-  name: loki
-  repository: https://grafana.github.io/helm-charts
-  version: 6.16.0
-- alias: neuvector
-  condition: core.enabled
-  name: core
-  repository: https://neuvector.github.io/neuvector-helm/
-  version: 2.8.1
-- condition: argo-cd.enabled
-  name: argo-cd
-  repository: https://argoproj.github.io/argo-helm
-  version: 7.6.8
-- condition: argo-workflows.enabled
-  name: argo-workflows
-  repository: https://argoproj.github.io/argo-helm
-  version: 0.42.5
-- condition: argo-events.enabled
-  name: argo-events
-  repository: https://argoproj.github.io/argo-helm
-  version: 2.4.8
-- condition: mysql.enabled
-  name: mysql
-  repository: https://charts.bitnami.com/bitnami
-  version: 11.1.17
-- condition: postgresql.enabled
-  name: postgresql
-  repository: https://charts.bitnami.com/bitnami
-  version: 16.0.1
-- alias: postgresqlha
-  condition: postgresql-ha.enabled
-  name: postgresql-ha
-  repository: https://charts.bitnami.com/bitnami
-  version: 14.2.33
-- condition: rabbitmq.enabled
-  name: rabbitmq
-  repository: https://charts.bitnami.com/bitnami
-  version: 15.0.1
-- condition: redis.enabled
-  name: redis
-  repository: https://charts.bitnami.com/bitnami
-  version: 20.1.7
-- condition: aws-ebs-csi-driver.enabled
-  name: aws-ebs-csi-driver
-  repository: https://kubernetes-sigs.github.io/aws-ebs-csi-driver
-  version: 2.35.1
-- condition: aws-vpc-cni.enabled
-  name: aws-vpc-cni
-  repository: https://aws.github.io/eks-charts
-  version: 1.18.5
-- condition: aws-load-balancer-controller.enabled
-  name: aws-load-balancer-controller
-  repository: https://aws.github.io/eks-charts
-  version: 1.9.0
-- alias: external-dns
-  condition: external-dns.enabled
-  name: external-dns
-  repository: https://kubernetes-sigs.github.io/external-dns/
-  version: 1.14.5
-- condition: external-secrets.enabled
-  name: external-secrets
-  repository: https://charts.external-secrets.io
-  version: 0.10.4
-- condition: gitlab.enabled
-  name: gitlab
-  repository: https://charts.gitlab.io
-  version: 8.4.1
-- condition: gitlab-runner.enabled
-  name: gitlab-runner
-  repository: https://charts.gitlab.io
-  version: 0.69.0
-- condition: vault.enabled
-  name: vault
-  repository: https://helm.releases.hashicorp.com
-  version: 0.28.1
-- condition: velero.enabled
-  name: velero
-  repository: https://vmware-tanzu.github.io/helm-charts
-  version: 7.2.1
-- condition: longhorn.enabled
-  name: longhorn
-  repository: https://charts.longhorn.io
-  version: 1.7.1
-- condition: crossplane.enabled
-  name: crossplane
-  repository: https://charts.crossplane.io/stable
-  version: 1.17.1
-- condition: cert-manager.enabled
-  name: cert-manager
-  repository: https://charts.jetstack.io
-  version: v1.16.0
-- condition: ingress-nginx.enabled
-  name: ingress-nginx
-  repository: https://kubernetes.github.io/ingress-nginx
-  version: 4.11.2
-- condition: open-webui.enabled
-  name: open-webui
-  repository: https://helm.openwebui.com/
-  version: 3.3.1
-
-
-- condition: kong.enabled
-  name: kong
-  repository: https://charts.konghq.com
-  version: 2.14.1
-
-- condition: kratos.enabled
-  name: kratos
-  repository: https://k8s.ory.sh/helm/charts
-  version: 0.10.0
-- condition: keto.enabled
-  name: keto
-  repository: https://k8s.ory.sh/helm/charts
-  version: 0.10.0
-- condition: hydra.enabled
-  name: hydra
-  repository: https://k8s.ory.sh/helm/charts
-  version: 0.10.0
-- condition: oathkeeper.enabled
-  name: oathkeeper
-  repository: https://k8s.ory.sh/helm/charts
-  version: 0.10.0
-- condition: hydraMaester.enabled
-  name: hydraMaester
-  repository: https://k8s.ory.sh/helm/charts
-  version: 0.10.0
-- condition: oathkeeperMaester.enabled
-  name: oathkeeperMaester
-  repository: https://k8s.ory.sh/helm/charts
-  version: 0.10.0
-description: A Helm chart for Kubernetes
-name: chart
-type: application
-version: 0.0.6
+    - name: grafana
+      repository: https://grafana.github.io/helm-charts
+      condition: grafana.enabled
+      version: 8.5.2
+    - name: prometheus
+      repository: https://prometheus-community.github.io/helm-charts
+      condition: prometheus.enabled
+      version: 25.27.0
+    - name: loki
+      repository: https://grafana.github.io/helm-charts
+      condition: loki.enabled
+      version: 6.16.0
+    - name: core
+      repository: https://neuvector.github.io/neuvector-helm/
+      condition: core.enabled
+      version: 2.8.1
+    - name: argo-cd
+      repository: https://argoproj.github.io/argo-helm
+      condition: argo-cd.enabled
+      version: 7.6.8
+    - name: argo-workflows
+      repository: https://argoproj.github.io/argo-helm
+      condition: argo-workflows.enabled
+      version: 0.42.5
+    - name: argo-events
+      repository: https://argoproj.github.io/argo-helm
+      condition: argo-events.enabled
+      version: 2.4.8
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      condition: mysql.enabled
+      version: 11.1.17
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      condition: postgresql.enabled
+      version: 16.0.1
+    - name: postgresql-ha
+      repository: https://charts.bitnami.com/bitnami
+      condition: postgresql-ha.enabled
+      version: 14.2.33
+    - name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      condition: rabbitmq.enabled
+      version: 15.0.1
+    - name: redis
+      repository: https://charts.bitnami.com/bitnami
+      condition: redis.enabled
+      version: 20.1.7
+    - name: aws-ebs-csi-driver
+      repository: https://kubernetes-sigs.github.io/aws-ebs-csi-driver
+      condition: aws-ebs-csi-driver.enabled
+      version: 2.35.1
+    - name: aws-vpc-cni
+      repository: https://aws.github.io/eks-charts
+      condition: aws-vpc-cni.enabled
+      version: 1.18.5
+    - name: aws-load-balancer-controller
+      repository: https://aws.github.io/eks-charts
+      condition: aws-load-balancer-controller.enabled
+      version: 1.9.0
+    - name: external-secrets
+      repository: https://charts.external-secrets.io
+      condition: external-secrets.enabled
+      version: 0.10.4
+    - name: gitlab
+      repository: https://charts.gitlab.io
+      condition: gitlab.enabled
+      version: 8.4.1
+    - name: gitlab-runner
+      repository: https://charts.gitlab.io
+      condition: gitlab-runner.enabled
+      version: 0.69.0
+    - name: vault
+      repository: https://helm.releases.hashicorp.com
+      condition: vault.enabled
+      version: 0.28.1
+    - name: velero
+      repository: https://vmware-tanzu.github.io/helm-charts
+      condition: velero.enabled
+      version: 7.2.1
+    - name: longhorn
+      repository: https://charts.longhorn.io
+      condition: longhorn.enabled
+      version: 1.7.1
+    - name: crossplane
+      repository: https://charts.crossplane.io/stable
+      condition: crossplane.enabled
+      version: 1.17.1
+    - name: cert-manager
+      repository: https://charts.jetstack.io
+      condition: cert-manager.enabled
+      version: v1.16.0
+    - name: ingress-nginx
+      repository: https://kubernetes.github.io/ingress-nginx
+      condition: ingress-nginx.enabled
+      version: 4.11.2
+    - name: open-webui
+      repository: https://helm.openwebui.com/
+      condition: open-webui.enabled
+      version: 3.3.1
+    - name: kong
+      repository: https://charts.konghq.com
+      condition: kong.enabled
+      version: 2.14.1
+    - name: kratos
+      repository: https://k8s.ory.sh/helm/charts
+      condition: kratos.enabled
+      version: 0.49.2
+    - name: kratos-selfservice-ui-node
+      repository: https://k8s.ory.sh/helm/charts
+      condition: kratos-selfservice-ui-node.enabled
+      version: 0.49.2
+    - name: hydra
+      repository: https://k8s.ory.sh/helm/charts
+      condition: hydra.enabled
+      version: 0.49.2
+    - name: maester
+      repository: https://k8s.ory.sh/helm/charts
+      condition: maester.enabled
+      version: 0.0.17
+    - name: oathkeeper
+      repository: https://k8s.ory.sh/helm/charts
+      condition: oathkeeper.enabled
+      version: 0.49.2
+    - name: oathkeeper-maester
+      repository: https://k8s.ory.sh/helm/charts
+      condition: oathkeeper-maester.enabled
+      version: 0.10.0
+    - name: openbao
+      repository: https://openbao.github.io/openbao-helm
+      condition: openbao.enabled
+      version: 0.1.0
