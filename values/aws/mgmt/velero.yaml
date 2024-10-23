@@ -1,0 +1,32 @@
+velero:
+  initContainers:
+    - name: velero-plugin-for-aws
+      image: velero/velero-plugin-for-aws:v1.6.0
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+        - mountPath: /target
+          name: plugins
+  configuration:
+    backupStorageLocation:
+    - name: "default"
+      provider: "velero.io/aws"
+      bucket: sys-velero-backups    # Replace with bucket name you created above
+      default: true
+      config:
+        region: us-east-1    # Region where your bucket is located
+    volumeSnapshotLocation: []
+
+  serviceAccount: 
+    server:
+      create: true
+      name: velero
+
+  schedules: 
+    toolbox-cluster:
+      disabled: false
+      schedule: "0 0 * * *"  # CRON expression to periodically take backups
+      template:
+        ttl: "240h"  # This setting will delete backups automatically after 10 days
+
+  credentials:
+    existingSecret: cloud-credentials
