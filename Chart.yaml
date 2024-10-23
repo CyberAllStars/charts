@@ -1,14 +1,6 @@
 apiVersion: v2
-appVersion: "0.0.4"
+appVersion: "0.0.6"
 dependencies:
-- condition: argo-cd.enabled
-  name: argo-cd
-  repository: https://argoproj.github.io/argo-helm
-  version: 7.6.8
-- condition: external-secrets.enabled
-  name: external-secrets
-  repository: https://charts.external-secrets.io
-  version: 0.10.4
 - condition: grafana.enabled
   name: grafana
   repository: https://grafana.github.io/helm-charts
@@ -80,14 +72,6 @@ dependencies:
   name: external-secrets
   repository: https://charts.external-secrets.io
   version: 0.10.4
-- condition: mysql.enabled
-  name: mysql
-  repository: https://charts.bitnami.com/bitnami
-  version: 11.1.17
-- condition: redis.enabled
-  name: redis
-  repository: https://charts.bitnami.com/bitnami
-  version: 20.1.7
 - condition: gitlab.enabled
   name: gitlab
   repository: https://charts.gitlab.io
@@ -127,4 +111,4 @@ dependencies:
 description: A Helm chart for Kubernetes
 name: chart
 type: application
-version: 0.0.4
+version: 0.0.6

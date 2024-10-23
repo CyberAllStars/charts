@@ -6,7 +6,6 @@
 **/node_modules/
 **/target/
 **/dist/
-**/charts/
 
 # Ignore all environment variables
 *.env

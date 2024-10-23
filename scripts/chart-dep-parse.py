@@ -34,7 +34,7 @@ for dep in chart['dependencies']:
             else:
                 continue
 
-    if run_all or debug_reg_add:
+    if run_all or debug_update:
         # UPDATE
         latest_version = subprocess.run(['helm', 'search', 'repo', f"{name}/{name}"], capture_output=True, text=True, check=True).stdout.splitlines()[1].split()[1]
         print(f"Updating {name} to version {latest_version}")
