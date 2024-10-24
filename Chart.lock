@@ -44,9 +44,6 @@ dependencies:
 - name: aws-load-balancer-controller
   repository: https://aws.github.io/eks-charts
   version: 1.9.0
-- name: external-dns
-  repository: https://kubernetes-sigs.github.io/external-dns/
-  version: 1.14.5
 - name: external-secrets
   repository: https://charts.external-secrets.io
   version: 0.10.4
@@ -77,5 +74,29 @@ dependencies:
 - name: open-webui
   repository: https://helm.openwebui.com/
   version: 3.3.1
-digest: sha256:de420ccd9f1fcaff7f2f7d4588ec903be2e7aae3454f07eec7d96c746a75a7a6
-generated: "2024-10-19T15:13:16.779486281+02:00"
+- name: kong
+  repository: https://charts.konghq.com
+  version: 2.42.0
+- name: kratos
+  repository: https://k8s.ory.sh/helm/charts
+  version: 0.49.2
+- name: kratos-selfservice-ui-node
+  repository: https://k8s.ory.sh/helm/charts
+  version: 0.49.2
+- name: hydra
+  repository: https://k8s.ory.sh/helm/charts
+  version: 0.49.2
+- name: maester
+  repository: https://k8s.ory.sh/helm/charts
+  version: 0.0.17
+- name: oathkeeper
+  repository: https://k8s.ory.sh/helm/charts
+  version: 0.49.2
+- name: oathkeeper-maester
+  repository: https://k8s.ory.sh/helm/charts
+  version: 0.10.0
+- name: openbao
+  repository: https://openbao.github.io/openbao-helm
+  version: 0.6.0
+digest: sha256:43eaebe92d0d8a1bc9925edb25ad0eb337f642a4d5fd2d0458fedb22b5067211
+generated: "2024-10-23T23:59:40.040553416+02:00"

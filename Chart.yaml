@@ -127,7 +127,7 @@ dependencies:
     - name: kong
       repository: https://charts.konghq.com
       condition: kong.enabled
-      version: 2.14.1
+      version: 2.42.0
     - name: kratos
       repository: https://k8s.ory.sh/helm/charts
       condition: kratos.enabled
@@ -155,4 +155,4 @@ dependencies:
     - name: openbao
       repository: https://openbao.github.io/openbao-helm
       condition: openbao.enabled
-      version: 0.1.0
+      version: 0.6.0
