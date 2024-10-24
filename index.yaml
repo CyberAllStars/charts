@@ -10,7 +10,7 @@ entries:
         url: https://argoproj.github.io/argo-helm/pgp_keys.asc
     apiVersion: v2
     appVersion: v2.12.4
-    created: "2024-10-24T12:33:36.824315168+02:00"
+    created: "2024-10-24T14:39:58.194610684+02:00"
     dependencies:
     - condition: redis-ha.enabled
       name: redis-ha
@@ -36,6 +36,41 @@ entries:
     urls:
     - charts/argo-cd-7.6.8.tgz
     version: 7.6.8
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: Set affinity in redis secret-init job.
+      artifacthub.io/signKey: |
+        fingerprint: 2B8F22F57260EFA67BE1C5824B11F800CD9D2252
+        url: https://argoproj.github.io/argo-helm/pgp_keys.asc
+    apiVersion: v2
+    appVersion: v2.12.4
+    created: "2024-10-24T14:39:58.328507943+02:00"
+    dependencies:
+    - condition: redis-ha.enabled
+      name: redis-ha
+      repository: https://dandydeveloper.github.io/charts/
+      version: 4.27.6
+    description: A Helm chart for Argo CD, a declarative, GitOps continuous delivery
+      tool for Kubernetes.
+    digest: d6ba5c33606ffa5c7078604f5b4a39cd8b2f62f90e443df6b91cd9e2590ecae2
+    home: https://github.com/argoproj/argo-helm
+    icon: https://argo-cd.readthedocs.io/en/stable/assets/logo.png
+    keywords:
+    - argoproj
+    - argocd
+    - gitops
+    kubeVersion: '>=1.25.0-0'
+    maintainers:
+    - name: argoproj
+      url: https://argoproj.github.io/
+    name: argo-cd
+    sources:
+    - https://github.com/argoproj/argo-helm/tree/main/charts/argo-cd
+    - https://github.com/argoproj/argo-cd
+    urls:
+    - tmpcharts-1125547/argo-cd-7.6.8.tgz
+    version: 7.6.8
   argo-events:
   - annotations:
       artifacthub.io/changes: |
@@ -46,7 +81,7 @@ entries:
         url: https://argoproj.github.io/argo-helm/pgp_keys.asc
     apiVersion: v2
     appVersion: v1.9.2
-    created: "2024-10-24T12:33:36.825199549+02:00"
+    created: "2024-10-24T14:39:58.195438133+02:00"
     description: A Helm chart for Argo Events, the event-driven workflow automation
       framework
     digest: 3431009295d7fb2443323051230e896fe726243950ef8310336d8d409156ccdb
@@ -64,6 +99,33 @@ entries:
     urls:
     - charts/argo-events-2.4.8.tgz
     version: 2.4.8
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: fixed
+          description: events-webhook Service using non-default port
+      artifacthub.io/signKey: |
+        fingerprint: 2B8F22F57260EFA67BE1C5824B11F800CD9D2252
+        url: https://argoproj.github.io/argo-helm/pgp_keys.asc
+    apiVersion: v2
+    appVersion: v1.9.2
+    created: "2024-10-24T14:39:58.329344408+02:00"
+    description: A Helm chart for Argo Events, the event-driven workflow automation
+      framework
+    digest: 3431009295d7fb2443323051230e896fe726243950ef8310336d8d409156ccdb
+    home: https://github.com/argoproj/argo-helm
+    icon: https://avatars.githubusercontent.com/u/30269780?s=200&v=4
+    keywords:
+    - argoproj
+    - argo-events
+    maintainers:
+    - name: argoproj
+      url: https://argoproj.github.io/
+    name: argo-events
+    sources:
+    - https://github.com/argoproj/argo-events
+    urls:
+    - tmpcharts-1125547/argo-events-2.4.8.tgz
+    version: 2.4.8
   argo-workflows:
   - annotations:
       artifacthub.io/changes: |
@@ -74,7 +136,7 @@ entries:
         url: https://argoproj.github.io/argo-helm/pgp_keys.asc
     apiVersion: v2
     appVersion: v3.5.11
-    created: "2024-10-24T12:33:36.826704487+02:00"
+    created: "2024-10-24T14:39:58.196791349+02:00"
     description: A Helm chart for Argo Workflows
     digest: d0630643c37df4fe545c31e3cf797b6bb2e81868c0b4d16b52b0079fcf189c66
     home: https://github.com/argoproj/argo-helm
@@ -89,10 +151,34 @@ entries:
     urls:
     - charts/argo-workflows-0.42.5.tgz
     version: 0.42.5
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: fixed
+          description: Avoid to create ClusterRole for cluster template when singleNamespace
+      artifacthub.io/signKey: |
+        fingerprint: 2B8F22F57260EFA67BE1C5824B11F800CD9D2252
+        url: https://argoproj.github.io/argo-helm/pgp_keys.asc
+    apiVersion: v2
+    appVersion: v3.5.11
+    created: "2024-10-24T14:39:58.330799734+02:00"
+    description: A Helm chart for Argo Workflows
+    digest: d0630643c37df4fe545c31e3cf797b6bb2e81868c0b4d16b52b0079fcf189c66
+    home: https://github.com/argoproj/argo-helm
+    icon: https://argo-workflows.readthedocs.io/en/stable/assets/logo.png
+    maintainers:
+    - name: argoproj
+      url: https://argoproj.github.io/
+    name: argo-workflows
+    sources:
+    - https://github.com/argoproj/argo-workflows
+    type: application
+    urls:
+    - tmpcharts-1125547/argo-workflows-0.42.5.tgz
+    version: 0.42.5
   aws-ebs-csi-driver:
   - apiVersion: v2
     appVersion: 1.35.0
-    created: "2024-10-24T12:33:36.827912+02:00"
+    created: "2024-10-24T14:39:58.197870976+02:00"
     description: A Helm chart for AWS EBS CSI Driver
     digest: 431e7974e7976f21cba1dce395829f41f9e7ec3963a4d1ac90e4490a02de081b
     home: https://github.com/kubernetes-sigs/aws-ebs-csi-driver
@@ -110,10 +196,30 @@ entries:
     urls:
     - charts/aws-ebs-csi-driver-2.35.1.tgz
     version: 2.35.1
+  - apiVersion: v2
+    appVersion: 1.35.0
+    created: "2024-10-24T14:39:58.331961184+02:00"
+    description: A Helm chart for AWS EBS CSI Driver
+    digest: 431e7974e7976f21cba1dce395829f41f9e7ec3963a4d1ac90e4490a02de081b
+    home: https://github.com/kubernetes-sigs/aws-ebs-csi-driver
+    keywords:
+    - aws
+    - ebs
+    - csi
+    kubeVersion: '>=1.17.0-0'
+    maintainers:
+    - name: Kubernetes Authors
+      url: https://github.com/kubernetes-sigs/aws-ebs-csi-driver/
+    name: aws-ebs-csi-driver
+    sources:
+    - https://github.com/kubernetes-sigs/aws-ebs-csi-driver
+    urls:
+    - tmpcharts-1125547/aws-ebs-csi-driver-2.35.1.tgz
+    version: 2.35.1
   aws-load-balancer-controller:
   - apiVersion: v2
     appVersion: v2.9.0
-    created: "2024-10-24T12:33:36.828979192+02:00"
+    created: "2024-10-24T14:39:58.198748558+02:00"
     description: AWS Load Balancer Controller Helm chart for Kubernetes
     digest: cb1f8738ced956e73e7128d540e4031167d8995870f6364a97a169d8e5d84231
     home: https://github.com/aws/eks-charts
@@ -137,10 +243,36 @@ entries:
     urls:
     - charts/aws-load-balancer-controller-1.9.0.tgz
     version: 1.9.0
+  - apiVersion: v2
+    appVersion: v2.9.0
+    created: "2024-10-24T14:39:58.332914626+02:00"
+    description: AWS Load Balancer Controller Helm chart for Kubernetes
+    digest: cb1f8738ced956e73e7128d540e4031167d8995870f6364a97a169d8e5d84231
+    home: https://github.com/aws/eks-charts
+    icon: https://raw.githubusercontent.com/aws/eks-charts/master/docs/logo/aws.png
+    keywords:
+    - eks
+    - alb
+    - load balancer
+    - ingress
+    - nlb
+    maintainers:
+    - email: kishorj@users.noreply.github.com
+      name: kishorj
+      url: https://github.com/kishorj
+    - email: m00nf1sh@users.noreply.github.com
+      name: m00nf1sh
+      url: https://github.com/m00nf1sh
+    name: aws-load-balancer-controller
+    sources:
+    - https://github.com/aws/eks-charts
+    urls:
+    - tmpcharts-1125547/aws-load-balancer-controller-1.9.0.tgz
+    version: 1.9.0
   aws-vpc-cni:
   - apiVersion: v1
     appVersion: v1.18.5
-    created: "2024-10-24T12:33:36.829719153+02:00"
+    created: "2024-10-24T14:39:58.199338545+02:00"
     description: A Helm chart for the AWS VPC CNI
     digest: 97f896261a6199d7578d89c07b9aca21b7c60f79b0116cfb1e44a5a058b854ed
     home: https://github.com/aws/amazon-vpc-cni-k8s
@@ -160,6 +292,28 @@ entries:
     urls:
     - charts/aws-vpc-cni-1.18.5.tgz
     version: 1.18.5
+  - apiVersion: v1
+    appVersion: v1.18.5
+    created: "2024-10-24T14:39:58.333602585+02:00"
+    description: A Helm chart for the AWS VPC CNI
+    digest: 97f896261a6199d7578d89c07b9aca21b7c60f79b0116cfb1e44a5a058b854ed
+    home: https://github.com/aws/amazon-vpc-cni-k8s
+    icon: https://raw.githubusercontent.com/aws/eks-charts/master/docs/logo/aws.png
+    keywords:
+    - eks
+    - cni
+    - networking
+    - vpc
+    maintainers:
+    - email: jayanthvn@users.noreply.github.com
+      name: Jayanth Varavani
+      url: https://github.com/jayanthvn
+    name: aws-vpc-cni
+    sources:
+    - https://github.com/aws/amazon-vpc-cni-k8s
+    urls:
+    - tmpcharts-1125547/aws-vpc-cni-1.18.5.tgz
+    version: 1.18.5
   cert-manager:
   - annotations:
       artifacthub.io/category: security
@@ -170,7 +324,7 @@ entries:
         url: https://cert-manager.io/public-keys/cert-manager-keyring-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.gpg
     apiVersion: v2
     appVersion: v1.16.0
-    created: "2024-10-24T12:33:36.834325499+02:00"
+    created: "2024-10-24T14:39:58.203291956+02:00"
     description: A Helm chart for cert-manager
     digest: 9721304201a8e4059797e06abcc5530bf3903938dc9a41e86879bd097129d5da
     home: https://cert-manager.io
@@ -191,10 +345,154 @@ entries:
     urls:
     - charts/cert-manager-v1.16.0.tgz
     version: v1.16.0
+  chart-index:
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2024-10-24T14:39:58.185127021+02:00"
+    dependencies:
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: 8.5.2
+    - condition: prometheus.enabled
+      name: prometheus
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 25.27.0
+    - condition: loki.enabled
+      name: loki
+      repository: https://grafana.github.io/helm-charts
+      version: 6.16.0
+    - condition: core.enabled
+      name: core
+      repository: https://neuvector.github.io/neuvector-helm/
+      version: 2.8.1
+    - condition: argo-cd.enabled
+      name: argo-cd
+      repository: https://argoproj.github.io/argo-helm
+      version: 7.6.8
+    - condition: argo-workflows.enabled
+      name: argo-workflows
+      repository: https://argoproj.github.io/argo-helm
+      version: 0.42.5
+    - condition: argo-events.enabled
+      name: argo-events
+      repository: https://argoproj.github.io/argo-helm
+      version: 2.4.8
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.1.17
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.0.1
+    - condition: postgresql-ha.enabled
+      name: postgresql-ha
+      repository: https://charts.bitnami.com/bitnami
+      version: 14.2.33
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 15.0.1
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 20.1.7
+    - condition: aws-ebs-csi-driver.enabled
+      name: aws-ebs-csi-driver
+      repository: https://kubernetes-sigs.github.io/aws-ebs-csi-driver
+      version: 2.35.1
+    - condition: aws-vpc-cni.enabled
+      name: aws-vpc-cni
+      repository: https://aws.github.io/eks-charts
+      version: 1.18.5
+    - condition: aws-load-balancer-controller.enabled
+      name: aws-load-balancer-controller
+      repository: https://aws.github.io/eks-charts
+      version: 1.9.0
+    - condition: external-secrets.enabled
+      name: external-secrets
+      repository: https://charts.external-secrets.io
+      version: 0.10.4
+    - condition: gitlab.enabled
+      name: gitlab
+      repository: https://charts.gitlab.io
+      version: 8.4.1
+    - condition: gitlab-runner.enabled
+      name: gitlab-runner
+      repository: https://charts.gitlab.io
+      version: 0.69.0
+    - condition: vault.enabled
+      name: vault
+      repository: https://helm.releases.hashicorp.com
+      version: 0.28.1
+    - condition: velero.enabled
+      name: velero
+      repository: https://vmware-tanzu.github.io/helm-charts
+      version: 7.2.1
+    - condition: longhorn.enabled
+      name: longhorn
+      repository: https://charts.longhorn.io
+      version: 1.7.1
+    - condition: crossplane.enabled
+      name: crossplane
+      repository: https://charts.crossplane.io/stable
+      version: 1.17.1
+    - condition: cert-manager.enabled
+      name: cert-manager
+      repository: https://charts.jetstack.io
+      version: v1.16.0
+    - condition: ingress-nginx.enabled
+      name: ingress-nginx
+      repository: https://kubernetes.github.io/ingress-nginx
+      version: 4.11.2
+    - condition: open-webui.enabled
+      name: open-webui
+      repository: https://helm.openwebui.com/
+      version: 3.3.1
+    - condition: kong.enabled
+      name: kong
+      repository: https://charts.konghq.com
+      version: 2.42.0
+    - condition: kratos.enabled
+      name: kratos
+      repository: https://k8s.ory.sh/helm/charts
+      version: 0.49.2
+    - condition: kratos-selfservice-ui-node.enabled
+      name: kratos-selfservice-ui-node
+      repository: https://k8s.ory.sh/helm/charts
+      version: 0.49.2
+    - condition: hydra.enabled
+      name: hydra
+      repository: https://k8s.ory.sh/helm/charts
+      version: 0.49.2
+    - condition: maester.enabled
+      name: maester
+      repository: https://k8s.ory.sh/helm/charts
+      version: 0.0.17
+    - condition: oathkeeper.enabled
+      name: oathkeeper
+      repository: https://k8s.ory.sh/helm/charts
+      version: 0.49.2
+    - condition: keto.enabled
+      name: keto
+      repository: https://k8s.ory.sh/helm/charts
+      version: 0.49.2
+    - condition: openbao.enabled
+      name: openbao
+      repository: https://openbao.github.io/openbao-helm
+      version: 0.6.0
+    description: A Helm chart for Kubernetes
+    digest: 5955fa0802dacfb21af395a5d6edaa792951daf52b2514fd98c8192e7369892f
+    name: chart-index
+    type: application
+    urls:
+    - chart-index-0.0.0.tgz
+    version: 0.0.0
   core:
   - apiVersion: v1
     appVersion: 5.4.0
-    created: "2024-10-24T12:33:36.835879599+02:00"
+    created: "2024-10-24T14:39:58.204980435+02:00"
     description: Helm chart for NeuVector's core services
     digest: aa4d1361579be5b08fc42c06bacf0e232ca1ce8e4b5baf1b20261af991d98284
     home: https://neuvector.com
@@ -209,10 +507,27 @@ entries:
     urls:
     - charts/core-2.8.1.tgz
     version: 2.8.1
+  - apiVersion: v1
+    appVersion: 5.4.0
+    created: "2024-10-24T14:39:58.336313436+02:00"
+    description: Helm chart for NeuVector's core services
+    digest: aa4d1361579be5b08fc42c06bacf0e232ca1ce8e4b5baf1b20261af991d98284
+    home: https://neuvector.com
+    icon: https://avatars2.githubusercontent.com/u/19367275?s=200&v=4
+    maintainers:
+    - email: support@neuvector.com
+      name: becitsthere
+    name: core
+    sources:
+    - https://github.com/neuvector/neuvector
+    - https://github.com/neuvector/neuvector-helm
+    urls:
+    - tmpcharts-1125547/core-2.8.1.tgz
+    version: 2.8.1
   crossplane:
   - apiVersion: v1
     appVersion: 1.17.1
-    created: "2024-10-24T12:33:36.837263862+02:00"
+    created: "2024-10-24T14:39:58.205595939+02:00"
     description: Crossplane is an open source Kubernetes add-on that enables platform
       teams to assemble infrastructure from multiple vendors, and expose higher level
       self-service APIs for application teams to consume.
@@ -252,7 +567,7 @@ entries:
   external-secrets:
   - apiVersion: v2
     appVersion: v0.10.4
-    created: "2024-10-24T12:33:36.84017265+02:00"
+    created: "2024-10-24T14:39:58.208163383+02:00"
     dependencies:
     - condition: bitwarden-sdk-server.enabled
       name: bitwarden-sdk-server
@@ -274,10 +589,34 @@ entries:
     urls:
     - charts/external-secrets-0.10.4.tgz
     version: 0.10.4
+  - apiVersion: v2
+    appVersion: v0.10.4
+    created: "2024-10-24T14:39:58.339783297+02:00"
+    dependencies:
+    - condition: bitwarden-sdk-server.enabled
+      name: bitwarden-sdk-server
+      repository: oci://ghcr.io/external-secrets/charts
+      version: v0.3.1
+    description: External secret management for Kubernetes
+    digest: 2044f38aefeb1b28a62d3429bb43559d54d75921f9605241c7d92e6f9b56b220
+    home: https://github.com/external-secrets/external-secrets
+    icon: https://raw.githubusercontent.com/external-secrets/external-secrets/main/assets/eso-logo-large.png
+    keywords:
+    - kubernetes-external-secrets
+    - secrets
+    kubeVersion: '>= 1.19.0-0'
+    maintainers:
+    - email: kellinmcavoy@gmail.com
+      name: mcavoyk
+    name: external-secrets
+    type: application
+    urls:
+    - tmpcharts-1125547/external-secrets-0.10.4.tgz
+    version: 0.10.4
   gitlab:
   - apiVersion: v1
     appVersion: v17.4.1
-    created: "2024-10-24T12:33:36.87182637+02:00"
+    created: "2024-10-24T14:39:58.242750762+02:00"
     dependencies:
     - name: gitlab
       repository: ""
@@ -349,10 +688,84 @@ entries:
     urls:
     - charts/gitlab-8.4.1.tgz
     version: 8.4.1
+  - apiVersion: v1
+    appVersion: v17.4.1
+    created: "2024-10-24T14:39:58.368716914+02:00"
+    dependencies:
+    - name: gitlab
+      repository: ""
+      version: '*.*.*'
+    - name: certmanager-issuer
+      repository: ""
+      version: '*.*.*'
+    - name: minio
+      repository: ""
+      version: '*.*.*'
+    - name: registry
+      repository: ""
+      version: '*.*.*'
+    - alias: certmanager
+      condition: certmanager.install
+      name: cert-manager
+      repository: https://charts.jetstack.io/
+      version: v1.12.13
+    - condition: prometheus.install
+      name: prometheus
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 15.18.0
+    - condition: postgresql.install
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.5.2
+    - condition: gitlab-runner.install
+      name: gitlab-runner
+      repository: https://charts.gitlab.io/
+      version: 0.69.0
+    - condition: redis.install
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.13.2
+    - condition: nginx-ingress.enabled
+      name: nginx-ingress
+      repository: ""
+      version: '*.*.*'
+    - alias: nginx-ingress-geo
+      condition: nginx-ingress-geo.enabled
+      name: nginx-ingress
+      repository: ""
+      version: '*.*.*'
+    - condition: gitlab-zoekt.install
+      name: gitlab-zoekt
+      repository: https://charts.gitlab.io/
+      version: 1.4.1
+    - condition: traefik.install
+      name: traefik
+      repository: https://helm.traefik.io/traefik
+      version: 10.19.4
+    - alias: haproxy
+      condition: haproxy.install
+      name: kubernetes-ingress
+      repository: https://haproxytech.github.io/helm-charts
+      version: 1.32.0
+    description: GitLab is the most comprehensive AI-powered DevSecOps Platform.
+    digest: 03e78662832227e6defaab79c3bd8694513e1b76aeca25ee0477f7deb7e6315a
+    home: https://about.gitlab.com/
+    icon: https://gitlab.com/gitlab-com/gitlab-artwork/raw/master/logo/logo-square.png
+    keywords:
+    - gitlab
+    maintainers:
+    - email: support@gitlab.com
+      name: GitLab Inc.
+    name: gitlab
+    sources:
+    - https://gitlab.com/gitlab-org/charts/gitlab
+    urls:
+    - tmpcharts-1125547/gitlab-8.4.1.tgz
+    version: 8.4.1
   gitlab-runner:
   - apiVersion: v1
     appVersion: 17.4.0
-    created: "2024-10-24T12:33:36.872934698+02:00"
+    created: "2024-10-24T14:39:58.244220455+02:00"
     description: GitLab Runner
     digest: 625c1e78bd0b2afa0cdd9dcb0c48da338aa84ac991bb425f369d39d62696ebe1
     icon: https://gitlab.com/uploads/-/system/project/avatar/250833/runner_logo.png
@@ -381,7 +794,7 @@ entries:
           url: https://github.com/grafana/grafana
     apiVersion: v2
     appVersion: 11.2.1
-    created: "2024-10-24T12:33:36.87535738+02:00"
+    created: "2024-10-24T14:39:58.247345536+02:00"
     description: The leading tool for querying and visualizing time series and metrics.
     digest: 20e837fc6a1e22da2ead492bb266448b30f4d12b5396355411bc8978f086a5dd
     home: https://grafana.com
@@ -411,10 +824,49 @@ entries:
     urls:
     - charts/grafana-8.5.2.tgz
     version: 8.5.2
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |
+        - name: Chart Source
+          url: https://github.com/grafana/helm-charts
+        - name: Upstream Project
+          url: https://github.com/grafana/grafana
+    apiVersion: v2
+    appVersion: 11.2.1
+    created: "2024-10-24T14:39:58.371089466+02:00"
+    description: The leading tool for querying and visualizing time series and metrics.
+    digest: 20e837fc6a1e22da2ead492bb266448b30f4d12b5396355411bc8978f086a5dd
+    home: https://grafana.com
+    icon: https://artifacthub.io/image/b4fed1a7-6c8f-4945-b99d-096efa3e4116
+    keywords:
+    - monitoring
+    - metric
+    kubeVersion: ^1.8.0-0
+    maintainers:
+    - email: zanhsieh@gmail.com
+      name: zanhsieh
+    - email: rluckie@cisco.com
+      name: rtluckie
+    - email: maor.friedman@redhat.com
+      name: maorfr
+    - email: miroslav.hadzhiev@gmail.com
+      name: Xtigyro
+    - email: mail@torstenwalter.de
+      name: torstenwalter
+    - email: github@jkroepke.de
+      name: jkroepke
+    name: grafana
+    sources:
+    - https://github.com/grafana/grafana
+    - https://github.com/grafana/helm-charts
+    type: application
+    urls:
+    - tmpcharts-1125547/grafana-8.5.2.tgz
+    version: 8.5.2
   hydra:
   - apiVersion: v2
     appVersion: v2.2.0
-    created: "2024-10-24T12:33:36.877103217+02:00"
+    created: "2024-10-24T14:39:58.249718047+02:00"
     dependencies:
     - alias: ory
       name: ory-commons
@@ -456,7 +908,7 @@ entries:
       artifacthub.io/prerelease: "false"
     apiVersion: v2
     appVersion: 1.11.2
-    created: "2024-10-24T12:33:36.880432831+02:00"
+    created: "2024-10-24T14:39:58.253763228+02:00"
     description: Ingress controller for Kubernetes using NGINX as a reverse proxy
       and load balancer
     digest: df79d6acb94c4c7c6e06624722a9c131c8cbc9fb5eaa5f3c962e003702aa8ea8
@@ -482,7 +934,7 @@ entries:
   keto:
   - apiVersion: v2
     appVersion: v0.12.0
-    created: "2024-10-24T12:33:36.881457784+02:00"
+    created: "2024-10-24T14:39:58.255403328+02:00"
     dependencies:
     - alias: ory
       name: ory-commons
@@ -514,7 +966,7 @@ entries:
   kong:
   - apiVersion: v2
     appVersion: "3.7"
-    created: "2024-10-24T12:33:36.887906047+02:00"
+    created: "2024-10-24T14:39:58.263669247+02:00"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -536,7 +988,7 @@ entries:
   kratos:
   - apiVersion: v2
     appVersion: v1.3.0
-    created: "2024-10-24T12:33:36.889102349+02:00"
+    created: "2024-10-24T14:39:58.265595468+02:00"
     dependencies:
     - alias: ory
       name: ory-commons
@@ -553,7 +1005,7 @@ entries:
   kratos-selfservice-ui-node:
   - apiVersion: v2
     appVersion: v0.13.0-4
-    created: "2024-10-24T12:33:36.889502406+02:00"
+    created: "2024-10-24T14:39:58.266107841+02:00"
     description: A Helm chart for ORY Kratos's example ui for Kubernetes
     digest: 393a162e9c3a7f054c53123ffa739c1c50e3539945c67d45525278c0602febed
     name: kratos-selfservice-ui-node
@@ -564,7 +1016,7 @@ entries:
   loki:
   - apiVersion: v2
     appVersion: 3.1.1
-    created: "2024-10-24T12:33:36.90226915+02:00"
+    created: "2024-10-24T14:39:58.28207556+02:00"
     dependencies:
     - alias: minio
       condition: minio.enabled
@@ -598,10 +1050,46 @@ entries:
     urls:
     - charts/loki-6.16.0.tgz
     version: 6.16.0
+  - apiVersion: v2
+    appVersion: 3.1.1
+    created: "2024-10-24T14:39:58.385286563+02:00"
+    dependencies:
+    - alias: minio
+      condition: minio.enabled
+      name: minio
+      repository: https://charts.min.io/
+      version: 4.0.15
+    - alias: grafana-agent-operator
+      condition: monitoring.selfMonitoring.grafanaAgent.installOperator
+      name: grafana-agent-operator
+      repository: https://grafana.github.io/helm-charts
+      version: 0.3.15
+    - alias: rollout_operator
+      condition: rollout_operator.enabled
+      name: rollout-operator
+      repository: https://grafana.github.io/helm-charts
+      version: 0.13.0
+    description: Helm chart for Grafana Loki and Grafana Enterprise Logs supporting
+      both simple, scalable and distributed modes.
+    digest: 3736cc857db923f15cfd6774b73082c35f7d8acc0ef8cf2e1ad5696cabf8644e
+    home: https://grafana.github.io/helm-charts
+    icon: https://grafana.com/docs/loki/latest/logo_and_name.png
+    maintainers:
+    - name: trevorwhitney
+    - name: jeschkies
+    name: loki
+    sources:
+    - https://github.com/grafana/loki
+    - https://grafana.com/oss/loki/
+    - https://grafana.com/docs/loki/latest/
+    type: application
+    urls:
+    - tmpcharts-1125547/loki-6.16.0.tgz
+    version: 6.16.0
   longhorn:
   - apiVersion: v1
     appVersion: v1.7.1
-    created: "2024-10-24T12:33:36.90519497+02:00"
+    created: "2024-10-24T14:39:58.284941138+02:00"
     description: Longhorn is a distributed block storage system for Kubernetes.
     digest: d98c2b4fe25903e1a3c6fab250e3b7001e120b6a91f07344247d4019a52b355b
     home: https://github.com/longhorn/longhorn
@@ -634,7 +1122,7 @@ entries:
   maester:
   - apiVersion: v1
     appVersion: v0.0.1
-    created: "2024-10-24T12:33:36.905507794+02:00"
+    created: "2024-10-24T14:39:58.285404329+02:00"
     description: A Helm chart for deployoing ORY Oathkeeper Rule Controller in Kubernetes
     digest: 65ee23a8850dbce8dfebafa5fada0e746b135c2ebd66d801b68c5fc4e589f430
     home: https://www.ory.sh/
@@ -671,7 +1159,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 8.4.2
-    created: "2024-10-24T12:33:36.907867147+02:00"
+    created: "2024-10-24T14:39:58.28852973+02:00"
     dependencies:
     - name: common
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -699,10 +1187,50 @@ entries:
     urls:
     - charts/mysql-11.1.17.tgz
     version: 11.1.17
+  - annotations:
+      category: Database
+      images: |
+        - name: mysql
+          image: docker.io/bitnami/mysql:8.4.2-debian-12-r4
+        - name: mysqld-exporter
+          image: docker.io/bitnami/mysqld-exporter:0.15.1-debian-12-r32
+        - name: os-shell
+          image: docker.io/bitnami/os-shell:12-debian-12-r29
+      licenses: Apache-2.0
+    apiVersion: v2
+    appVersion: 8.4.2
+    created: "2024-10-24T14:39:58.387757777+02:00"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    description: MySQL is a fast, reliable, scalable, and easy to use open source
+      relational database system. Designed to handle mission-critical, heavy-load
+      production applications.
+    digest: 97eb57465c6d9e8f0c94ae67ae83331020f340a72ae9af83caee04c92c1168af
+    home: https://bitnami.com
+    icon: https://bitnami.com/assets/stacks/mysql/img/mysql-stack-220x234.png
+    keywords:
+    - mysql
+    - database
+    - sql
+    - cluster
+    - high availability
+    maintainers:
+    - name: Broadcom, Inc. All Rights Reserved.
+      url: https://github.com/bitnami/charts
+    name: mysql
+    sources:
+    - https://github.com/bitnami/charts/tree/main/bitnami/mysql
+    urls:
+    - tmpcharts-1125547/mysql-11.1.17.tgz
+    version: 11.1.17
   oathkeeper:
   - apiVersion: v2
     appVersion: v0.40.7
-    created: "2024-10-24T12:33:36.909110407+02:00"
+    created: "2024-10-24T14:39:58.290104538+02:00"
     dependencies:
     - alias: oathkeeper-maester
       condition: maester.enabled
@@ -739,7 +1267,7 @@ entries:
       licenses: MIT
     apiVersion: v2
     appVersion: 0.3.30
-    created: "2024-10-24T12:33:36.911750834+02:00"
+    created: "2024-10-24T14:39:58.291950831+02:00"
     dependencies:
     - condition: ollama.enabled
       import-values:
@@ -778,7 +1306,7 @@ entries:
       charts.openshift.io/name: Openbao
     apiVersion: v2
     appVersion: v2.0.2
-    created: "2024-10-24T12:33:36.914855257+02:00"
+    created: "2024-10-24T14:39:58.29448343+02:00"
     description: Official OpenBao Chart
     digest: 1cc7e3085a781bc8861086c307533a54d0581ce1acea8945045180fdfad58b33
     home: https://github.com/openbao/openbao-helm
@@ -816,7 +1344,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 17.0.0
-    created: "2024-10-24T12:33:36.920758594+02:00"
+    created: "2024-10-24T14:39:58.299205911+02:00"
     dependencies:
     - name: common
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -845,6 +1373,47 @@ entries:
     urls:
     - charts/postgresql-16.0.1.tgz
     version: 16.0.1
+  - annotations:
+      category: Database
+      images: |
+        - name: os-shell
+          image: docker.io/bitnami/os-shell:12-debian-12-r30
+        - name: postgres-exporter
+          image: docker.io/bitnami/postgres-exporter:0.15.0-debian-12-r44
+        - name: postgresql
+          image: docker.io/bitnami/postgresql:17.0.0-debian-12-r1
+      licenses: Apache-2.0
+    apiVersion: v2
+    appVersion: 17.0.0
+    created: "2024-10-24T14:39:58.391645306+02:00"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    description: PostgreSQL (Postgres) is an open source object-relational database
+      known for reliability and data integrity. ACID-compliant, it supports foreign
+      keys, joins, views, triggers and stored procedures.
+    digest: ee12e8b33288078412b86b22163fac70dc1fbc758db123b0dfb79b0972d83ba5
+    home: https://bitnami.com
+    icon: https://bitnami.com/assets/stacks/postgresql/img/postgresql-stack-220x234.png
+    keywords:
+    - postgresql
+    - postgres
+    - database
+    - sql
+    - replication
+    - cluster
+    maintainers:
+    - name: Broadcom, Inc. All Rights Reserved.
+      url: https://github.com/bitnami/charts
+    name: postgresql
+    sources:
+    - https://github.com/bitnami/charts/tree/main/bitnami/postgresql
+    urls:
+    - tmpcharts-1125547/postgresql-16.0.1.tgz
+    version: 16.0.1
   postgresql-ha:
   - annotations:
       category: Database
@@ -860,7 +1429,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 16.4.0
-    created: "2024-10-24T12:33:36.925387973+02:00"
+    created: "2024-10-24T14:39:58.305021754+02:00"
     dependencies:
     - name: common
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -892,6 +1461,52 @@ entries:
     urls:
     - charts/postgresql-ha-14.2.33.tgz
     version: 14.2.33
+  - annotations:
+      category: Database
+      images: |
+        - name: os-shell
+          image: docker.io/bitnami/os-shell:12-debian-12-r30
+        - name: pgpool
+          image: docker.io/bitnami/pgpool:4.5.4-debian-12-r0
+        - name: postgres-exporter
+          image: docker.io/bitnami/postgres-exporter:0.15.0-debian-12-r44
+        - name: postgresql-repmgr
+          image: docker.io/bitnami/postgresql-repmgr:16.4.0-debian-12-r22
+      licenses: Apache-2.0
+    apiVersion: v2
+    appVersion: 16.4.0
+    created: "2024-10-24T14:39:58.395701247+02:00"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    description: This PostgreSQL cluster solution includes the PostgreSQL replication
+      manager, an open-source tool for managing replication and failover on PostgreSQL
+      clusters.
+    digest: 9a6bde25827269800f3ce4bcb32467f22c72504a1e76bb9538791b1381bc3b3c
+    home: https://bitnami.com
+    icon: https://bitnami.com/assets/stacks/postgresql/img/postgresql-stack-220x234.png
+    keywords:
+    - postgresql
+    - repmgr
+    - pgpool
+    - postgres
+    - database
+    - sql
+    - replication
+    - cluster
+    - high availability
+    maintainers:
+    - name: Broadcom, Inc. All Rights Reserved.
+      url: https://github.com/bitnami/charts
+    name: postgresql-ha
+    sources:
+    - https://github.com/bitnami/charts/tree/main/bitnami/postgresql-ha
+    urls:
+    - tmpcharts-1125547/postgresql-ha-14.2.33.tgz
+    version: 14.2.33
   prometheus:
   - annotations:
       artifacthub.io/license: Apache-2.0
@@ -902,7 +1517,7 @@ entries:
           url: https://github.com/prometheus/prometheus
     apiVersion: v2
     appVersion: v2.54.1
-    created: "2024-10-24T12:33:36.931164352+02:00"
+    created: "2024-10-24T14:39:58.309983109+02:00"
     dependencies:
     - condition: alertmanager.enabled
       name: alertmanager
@@ -950,6 +1565,63 @@ entries:
     urls:
     - charts/prometheus-25.27.0.tgz
     version: 25.27.0
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |
+        - name: Chart Source
+          url: https://github.com/prometheus-community/helm-charts
+        - name: Upstream Project
+          url: https://github.com/prometheus/prometheus
+    apiVersion: v2
+    appVersion: v2.54.1
+    created: "2024-10-24T14:39:58.401512863+02:00"
+    dependencies:
+    - condition: alertmanager.enabled
+      name: alertmanager
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 1.12.*
+    - condition: kube-state-metrics.enabled
+      name: kube-state-metrics
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 5.25.*
+    - condition: prometheus-node-exporter.enabled
+      name: prometheus-node-exporter
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 4.39.*
+    - condition: prometheus-pushgateway.enabled
+      name: prometheus-pushgateway
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 2.14.*
+    description: Prometheus is a monitoring system and time series database.
+    digest: 80f0d207bbfb37336b1b0a3fd6c7a60b42b8292eeb991c14a612b5759de01f95
+    home: https://prometheus.io/
+    icon: https://raw.githubusercontent.com/prometheus/prometheus.github.io/master/assets/prometheus_logo-cb55bb5c346.png
+    keywords:
+    - monitoring
+    - prometheus
+    kubeVersion: '>=1.19.0-0'
+    maintainers:
+    - email: gianrubio@gmail.com
+      name: gianrubio
+    - email: zanhsieh@gmail.com
+      name: zanhsieh
+    - email: miroslav.hadzhiev@gmail.com
+      name: Xtigyro
+    - email: naseem@transit.app
+      name: naseemkullah
+    - email: rootsandtrees@posteo.de
+      name: zeritti
+    name: prometheus
+    sources:
+    - https://github.com/prometheus/alertmanager
+    - https://github.com/prometheus/prometheus
+    - https://github.com/prometheus/pushgateway
+    - https://github.com/prometheus/node_exporter
+    - https://github.com/kubernetes/kube-state-metrics
+    type: application
+    urls:
+    - tmpcharts-1125547/prometheus-25.27.0.tgz
+    version: 25.27.0
   rabbitmq:
   - annotations:
       category: Infrastructure
@@ -961,7 +1633,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 4.0.2
-    created: "2024-10-24T12:33:36.933875131+02:00"
+    created: "2024-10-24T14:39:58.312700892+02:00"
     dependencies:
     - name: common
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -987,6 +1659,42 @@ entries:
     urls:
     - charts/rabbitmq-15.0.1.tgz
     version: 15.0.1
+  - annotations:
+      category: Infrastructure
+      images: |
+        - name: os-shell
+          image: docker.io/bitnami/os-shell:12-debian-12-r30
+        - name: rabbitmq
+          image: docker.io/bitnami/rabbitmq:4.0.2-debian-12-r0
+      licenses: Apache-2.0
+    apiVersion: v2
+    appVersion: 4.0.2
+    created: "2024-10-24T14:39:58.404690962+02:00"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    description: RabbitMQ is an open source general-purpose message broker that is
+      designed for consistent, highly-available messaging scenarios (both synchronous
+      and asynchronous).
+    digest: fcc90978cf1822dade84d59c0be1f4c5f38f61ceae1f984eec3c7a66d4917b1d
+    home: https://bitnami.com
+    icon: https://bitnami.com/assets/stacks/rabbitmq/img/rabbitmq-stack-220x234.png
+    keywords:
+    - rabbitmq
+    - message queue
+    - AMQP
+    maintainers:
+    - name: Broadcom, Inc. All Rights Reserved.
+      url: https://github.com/bitnami/charts
+    name: rabbitmq
+    sources:
+    - https://github.com/bitnami/charts/tree/main/bitnami/rabbitmq
+    urls:
+    - tmpcharts-1125547/rabbitmq-15.0.1.tgz
+    version: 15.0.1
   redis:
   - annotations:
       category: Database
@@ -1004,7 +1712,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 7.4.1
-    created: "2024-10-24T12:33:36.938272026+02:00"
+    created: "2024-10-24T14:39:58.317010666+02:00"
     dependencies:
     - name: common
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -1030,12 +1738,54 @@ entries:
     urls:
     - charts/redis-20.1.7.tgz
     version: 20.1.7
+  - annotations:
+      category: Database
+      images: |
+        - name: kubectl
+          image: docker.io/bitnami/kubectl:1.31.1-debian-12-r3
+        - name: os-shell
+          image: docker.io/bitnami/os-shell:12-debian-12-r30
+        - name: redis
+          image: docker.io/bitnami/redis:7.4.1-debian-12-r0
+        - name: redis-exporter
+          image: docker.io/bitnami/redis-exporter:1.63.0-debian-12-r1
+        - name: redis-sentinel
+          image: docker.io/bitnami/redis-sentinel:7.4.1-debian-12-r0
+      licenses: Apache-2.0
+    apiVersion: v2
+    appVersion: 7.4.1
+    created: "2024-10-24T14:39:58.409800702+02:00"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    description: Redis(R) is an open source, advanced key-value store. It is often
+      referred to as a data structure server since keys can contain strings, hashes,
+      lists, sets and sorted sets.
+    digest: f9707ff49ba70e63d911ee141593de85889cbcf59676c39a2aba079bf662808f
+    home: https://bitnami.com
+    icon: https://bitnami.com/assets/stacks/redis/img/redis-stack-220x234.png
+    keywords:
+    - redis
+    - keyvalue
+    - database
+    maintainers:
+    - name: Broadcom, Inc. All Rights Reserved.
+      url: https://github.com/bitnami/charts
+    name: redis
+    sources:
+    - https://github.com/bitnami/charts/tree/main/bitnami/redis
+    urls:
+    - tmpcharts-1125547/redis-20.1.7.tgz
+    version: 20.1.7
   vault:
   - annotations:
       charts.openshift.io/name: HashiCorp Vault
     apiVersion: v2
     appVersion: 1.17.2
-    created: "2024-10-24T12:33:36.940260958+02:00"
+    created: "2024-10-24T14:39:58.318950402+02:00"
     description: Official HashiCorp Vault Chart
     digest: 99efe00f5527182e76d6e7a0ccf9d4797badd248cb8fe070fbe117e0b6cb58d7
     home: https://www.vaultproject.io
@@ -1061,7 +1811,7 @@ entries:
   velero:
   - apiVersion: v2
     appVersion: 1.14.1
-    created: "2024-10-24T12:33:36.941577174+02:00"
+    created: "2024-10-24T14:39:58.320712128+02:00"
     description: A Helm chart for velero
     digest: 45a7557f484e6dfc5420a0d167d3c3974d1ef12665cab1e5f8378cae211e2590
     home: https://github.com/vmware-tanzu/velero
@@ -1082,4 +1832,4 @@ entries:
     urls:
     - charts/velero-7.2.1.tgz
     version: 7.2.1
-generated: "2024-10-24T12:33:36.815524564+02:00"
+generated: "2024-10-24T14:39:58.033188929+02:00"
