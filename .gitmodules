@@ -1,3 +1,0 @@
-[submodule "services/supabase"]
-	path = services/supabase
-	url = git@github.com:bazaarlevel/supabase-kubernetes.git
